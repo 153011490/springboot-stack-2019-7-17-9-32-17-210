@@ -133,6 +133,24 @@ public class CaseRepositoryTest {
         Assertions.assertEquals(cs2.getTime(),caseList.get(1).getTime());
     }
 
+    @Test
+    @DirtiesContext
+    public void should_return_true_size_when_delete(){
+        //given
+        Case cs1 = new Case();
+        cs1.setName("cs1");
+        cs1.setTime(new Date().getTime());
+        caseRepository.save(cs1);
+        Case cs2 = new Case();
+        cs2.setName("cs2");
+        cs2.setTime(new Date().getTime());
+        caseRepository.save(cs2);
+        //when
+        caseRepository.deleteById(cs1.getId());
+        List<Case> criminals = caseRepository.findAll();
+        //then
+        Assertions.assertEquals(1,criminals.size());
+    }
 
 
 }
