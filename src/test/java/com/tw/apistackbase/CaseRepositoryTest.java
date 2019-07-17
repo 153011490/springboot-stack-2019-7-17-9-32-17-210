@@ -72,7 +72,21 @@ public class CaseRepositoryTest {
         Assertions.assertEquals(1,caseRepository.findAll().size());
     }
 
-
+    @Test
+    @DirtiesContext
+    public void test_should_return_case_when_the_case_exist_given_id() {
+        //given
+        Case cs = new Case();
+        cs.setTime(new Date().getTime());
+        cs.setName("case1");
+        caseRepository.save(cs);
+        //when
+        Case actual=caseRepository.findById(cs.getId()).get();
+        //then
+        Assertions.assertEquals(cs.getId(),actual.getId());
+        Assertions.assertEquals(cs.getName(),actual.getName());
+        Assertions.assertEquals(cs.getTime(),actual.getTime());
+    }
 
 
 
