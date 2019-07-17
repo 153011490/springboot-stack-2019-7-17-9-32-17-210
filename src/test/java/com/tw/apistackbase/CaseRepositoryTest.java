@@ -109,6 +109,30 @@ public class CaseRepositoryTest {
         Assertions.assertEquals(cs2.getTime(),caseList.get(0).getTime());
     }
 
+    @Test
+    @DirtiesContext
+    public void test_should_return_all_case_when_the_case_exist_given_name() {
+        //given
+        Case cs = new Case();
+        cs.setTime(new Date().getTime());
+        cs.setName("caseE");
+        caseRepository.save(cs);
+        Case cs2 = new Case();
+        cs2.setTime(new Date().getTime());
+        cs2.setName("caseE");
+        caseRepository.save(cs2);
+        //when
+        List<Case> caseList=caseRepository.findAllByName("caseE");
+        //then
+        Assertions.assertEquals(cs.getId(),caseList.get(0).getId());
+        Assertions.assertEquals(cs.getName(),caseList.get(0).getName());
+        Assertions.assertEquals(cs.getTime(),caseList.get(0).getTime());
+
+        Assertions.assertEquals(cs2.getId(),caseList.get(1).getId());
+        Assertions.assertEquals(cs2.getName(),caseList.get(1).getName());
+        Assertions.assertEquals(cs2.getTime(),caseList.get(1).getTime());
+    }
+
 
 
 }

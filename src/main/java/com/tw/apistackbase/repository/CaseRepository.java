@@ -12,4 +12,6 @@ public interface CaseRepository extends JpaRepository<Case,String> {
     @Query(value = "select * from case order by time desc",nativeQuery = true)
     public List<Case> findAllByTime();
 
+    public List<Case> findAllByName(String name);
+
 }
